@@ -17,5 +17,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.6'
     compile 'org.slf4j:slf4j-log4j12:1.7.25'
     compile 'com.squareup.okhttp3:okhttp:3.14.9'
+    compile 'com.github.icecooly:FastHttpClient:1.7'
     testCompile 'org.spockframework:spock-core:2.0-M4-groovy-3.0'
 }
