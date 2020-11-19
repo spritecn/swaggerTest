@@ -1,6 +1,6 @@
 package github.spritecn.swaggerTest.start
 
-import static spark.Spark.*;
+import static spark.Spark.*
 class Application {
     static void main(String[] args) {
         staticFiles.location("/public")
