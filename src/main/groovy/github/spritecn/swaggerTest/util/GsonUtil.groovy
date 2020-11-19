@@ -14,9 +14,10 @@ import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type;
 import java.text.DateFormat
 
-
 /**
  *
+ * @author: spriteCn 2020/11/19
+ * @Description:
  */
 class GsonUtil {
     //out gson
@@ -28,6 +29,12 @@ class GsonUtil {
         gsonBuilder.registerTypeAdapter(Date.class, new DateDeserializer()).setDateFormat(DateFormat.LONG)
         gsonBuilder.create()
     }
+    /**
+     *
+     * @param json
+     * @param clazz T
+     * @return List<T>
+     */
     static final <T> List<T> getList(final String json,final Class<T> clazz) {
         Type listType = TypeToken.getParameterized(List.class, clazz).getType()
         gson.fromJson(json,listType)
