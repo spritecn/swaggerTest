@@ -3,9 +3,6 @@ buildscript {
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }
-        maven {
-            url 'https://maven.aliyun.com/repository/spring/'
-        }
         mavenLocal()
         mavenCentral()
     }
@@ -27,9 +24,6 @@ targetCompatibility = 1.8
 repositories {
     maven {
         url 'https://maven.aliyun.com/repository/public/'
-    }
-    maven {
-        url 'https://maven.aliyun.com/repository/spring/'
     }
     mavenLocal()
     mavenCentral()
@@ -55,7 +49,7 @@ dependencies {
 
 
 
-task jooqCodeGenerate {
+task jooqCodeGenerate (type:Task) {
 // Use your favourite XML builder to construct the code generation configuration file
     def writer = new StringWriter()
     new groovy.xml.MarkupBuilder(writer)
@@ -68,14 +62,17 @@ task jooqCodeGenerate {
                 generator() {
                     database() {
                         includes('.*') //包括的数据表
-                        excludes("sqlite_sequence") //排除的数据表
+                        excludes("sqlite_sequence") //排除系统自增id表
                         inputSchema() //默认数据库
                     }
                     generate([:]) {
                         pojos true
+                        daos true
+                        fluentSetters true
+                        javaBeansGettersAndSetters true
                     }
                     target() {
-                        packageName('github.spritecn.swaggerTest.dao') //计划用于存储生成结果的包名
+                        packageName('github.spritecn.swaggerTest.repository') //计划用于存储生成结果的包名
                         directory('src/main/groovy') //将生成结果储存于src/main/java
                     }
                 }
