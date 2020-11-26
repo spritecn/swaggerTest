@@ -46,8 +46,8 @@ dependencies {
     compile ('cn.hutool:hutool-setting:5.5.1') {
         exclude  group: 'cn.hutool', module: 'hutool-log'
     }
+    compile 'org.jooq:jooq-codegen:3.13.6'
     compile 'org.jooq:jooq:3.13.6'
-    compile("org.jooq:jooq-codegen:3.13.6")
     compile 'org.xerial:sqlite-jdbc:3.25.2'
 
     testCompile 'org.spockframework:spock-core:2.0-M4-groovy-3.0'
@@ -70,6 +70,9 @@ task jooqCodeGenerate {
                         includes('.*') //包括的数据表
                         excludes("sqlite_sequence") //排除的数据表
                         inputSchema() //默认数据库
+                    }
+                    generate([:]) {
+                        pojos true
                     }
                     target() {
                         packageName('github.spritecn.swaggerTest.dao') //计划用于存储生成结果的包名
