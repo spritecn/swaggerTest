@@ -1,3 +1,20 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/spring/'
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.jooq:jooq-codegen:3.13.6'
+        classpath 'org.xerial:sqlite-jdbc:3.25.2'
+    }
+}
+
 plugins {
     id 'groovy'
 }
@@ -8,7 +25,14 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    maven {url 'https://maven.aliyun.com/repository/public'}
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/spring/'
+    }
+    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
@@ -22,8 +46,37 @@ dependencies {
     compile ('cn.hutool:hutool-setting:5.5.1') {
         exclude  group: 'cn.hutool', module: 'hutool-log'
     }
-    compile 'org.jooq:jooq:3.11.12'
-    compile 'org.xerial: sqlite-jdbc:3.25.2'
+    compile 'org.jooq:jooq:3.13.6'
+    compile("org.jooq:jooq-codegen:3.13.6")
+    compile 'org.xerial:sqlite-jdbc:3.25.2'
 
     testCompile 'org.spockframework:spock-core:2.0-M4-groovy-3.0'
 }
+
+
+
+task jooqCodeGenerate {
+// Use your favourite XML builder to construct the code generation configuration file
+    def writer = new StringWriter()
+    new groovy.xml.MarkupBuilder(writer)
+            .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.13.0.xsd') {
+                jdbc() {
+                    url('jdbc:sqlite:src/main/resources/data/main.db') // src/main/resources/database.db为数据库路径
+                    //user() //不需要用户名，省略
+                    //password() //不需要密码，省略
+                }
+                generator() {
+                    database() {
+                        includes('.*') //包括的数据表
+                        excludes("sqlite_sequence") //排除的数据表
+                        inputSchema() //默认数据库
+                    }
+                    target() {
+                        packageName('github.spritecn.swaggerTest.dao') //计划用于存储生成结果的包名
+                        directory('src/main/groovy') //将生成结果储存于src/main/java
+                    }
+                }
+            }
+    org.jooq.codegen.GenerationTool.generate(writer.toString())
+}
+
