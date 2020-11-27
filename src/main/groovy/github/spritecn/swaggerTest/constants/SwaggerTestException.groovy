@@ -12,14 +12,12 @@ class SwaggerTestException extends Exception {
         this.errorCode = errorCode;
     }
 
-    public BusinessException() {
-    }
 
-    public BusinessException(String msg) {
+    public SwaggerTestException(String msg) {
         super(msg);
     }
 
-    public BusinessException(Throwable cause) {
+    public SwaggerTestException(Throwable cause) {
         super(cause);
     }
 
