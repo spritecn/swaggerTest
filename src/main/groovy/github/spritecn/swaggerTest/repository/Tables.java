@@ -4,7 +4,7 @@
 package github.spritecn.swaggerTest.repository;
 
 
-import github.spritecn.swaggerTest.repository.tables.Swagger;
+import github.spritecn.swaggerTest.repository.tables.Source;
 
 
 /**
@@ -14,7 +14,7 @@ import github.spritecn.swaggerTest.repository.tables.Swagger;
 public class Tables {
 
     /**
-     * The table <code>swagger</code>.
+     * The table <code>source</code>.
      */
-    public static final Swagger SWAGGER = Swagger.SWAGGER;
+    public static final Source SOURCE = Source.SOURCE;
 }

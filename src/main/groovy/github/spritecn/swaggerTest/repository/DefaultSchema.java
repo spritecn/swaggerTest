@@ -4,7 +4,7 @@
 package github.spritecn.swaggerTest.repository;
 
 
-import github.spritecn.swaggerTest.repository.tables.Swagger;
+import github.spritecn.swaggerTest.repository.tables.Source;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultSchema extends SchemaImpl {
 
-    private static final long serialVersionUID = 1516906350;
+    private static final long serialVersionUID = 1064846808;
 
     /**
      * The reference instance of <code>DEFAULT_SCHEMA</code>
@@ -28,9 +28,9 @@ public class DefaultSchema extends SchemaImpl {
     public static final DefaultSchema DEFAULT_SCHEMA = new DefaultSchema();
 
     /**
-     * The table <code>swagger</code>.
+     * The table <code>source</code>.
      */
-    public final Swagger SWAGGER = Swagger.SWAGGER;
+    public final Source SOURCE = Source.SOURCE;
 
     /**
      * No further instances allowed
@@ -48,6 +48,6 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
-            Swagger.SWAGGER);
+            Source.SOURCE);
     }
 }

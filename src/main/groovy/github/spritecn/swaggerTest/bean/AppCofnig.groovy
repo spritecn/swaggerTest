@@ -14,10 +14,11 @@ import groovy.transform.Immutable
 class AppConfig{
     String swaggerPath
     String apiDocPath
+    String jdbcUrl
 
     static AppConfig getConfig(){
         Props props = new Props("app.properties")
-        new AppConfig(props.getProperty("apiDoc.swaggerPath"),props.getProperty("apiDoc.apiDocPath"))
+        new AppConfig(props.getProperty("apiDoc.swaggerPath"),props.getProperty("apiDoc.apiDocPath"),props.getProperty("jdbc.url"))
     }
 }
 

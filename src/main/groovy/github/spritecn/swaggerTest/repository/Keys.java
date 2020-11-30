@@ -4,8 +4,8 @@
 package github.spritecn.swaggerTest.repository;
 
 
-import github.spritecn.swaggerTest.repository.tables.Swagger;
-import github.spritecn.swaggerTest.repository.tables.records.SwaggerRecord;
+import github.spritecn.swaggerTest.repository.tables.Source;
+import github.spritecn.swaggerTest.repository.tables.records.SourceRecord;
 
 import org.jooq.Identity;
 import org.jooq.TableField;
@@ -24,13 +24,13 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<SwaggerRecord, Integer> IDENTITY_SWAGGER = Identities0.IDENTITY_SWAGGER;
+    public static final Identity<SourceRecord, Integer> IDENTITY_SOURCE = Identities0.IDENTITY_SOURCE;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<SwaggerRecord> PK_SWAGGER = UniqueKeys0.PK_SWAGGER;
+    public static final UniqueKey<SourceRecord> PK_SOURCE = UniqueKeys0.PK_SOURCE;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -42,10 +42,10 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 {
-        public static Identity<SwaggerRecord, Integer> IDENTITY_SWAGGER = Internal.createIdentity(Swagger.SWAGGER, Swagger.SWAGGER.ID);
+        public static Identity<SourceRecord, Integer> IDENTITY_SOURCE = Internal.createIdentity(Source.SOURCE, Source.SOURCE.ID);
     }
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<SwaggerRecord> PK_SWAGGER = Internal.createUniqueKey(Swagger.SWAGGER, "pk_swagger", new TableField[] { Swagger.SWAGGER.ID }, true);
+        public static final UniqueKey<SourceRecord> PK_SOURCE = Internal.createUniqueKey(Source.SOURCE, "pk_source", new TableField[] { Source.SOURCE.ID }, true);
     }
 }

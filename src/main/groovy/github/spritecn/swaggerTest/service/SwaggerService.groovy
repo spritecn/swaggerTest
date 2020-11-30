@@ -2,9 +2,9 @@ package github.spritecn.swaggerTest.service
 
 import github.spritecn.swaggerTest.bean.AppConfig
 import github.spritecn.swaggerTest.constants.SwaggerTestException
-import github.spritecn.swaggerTest.repository.DaoConnectUtil
-import github.spritecn.swaggerTest.repository.tables.daos.SwaggerDao
-import github.spritecn.swaggerTest.repository.tables.pojos.SwaggerEntity
+import github.spritecn.swaggerTest.repository.tables.daos.SourceDao
+import github.spritecn.swaggerTest.repository.tables.pojos.SourceEntity
+import github.spritecn.swaggerTest.util.DaoFactory
 import groovy.util.logging.Slf4j
 
 import io.swagger.models.Swagger as SwaggerModel
@@ -23,9 +23,12 @@ class SwaggerService {
         if(!swaggerModel){
             throw new SwaggerTestException("swagger parse error")
         }
-        SwaggerEntity entity = new SwaggerEntity().setBasePath(swaggerModel.getBasePath()).setHost(swaggerModel.getHost()).setSchemes(swaggerModel.getSchemes()?swaggerModel.getSchemes().join(","):"HTTP").setSourceUrl(url)
-        new DaoConnectUtil().withCloseable {
-            it.getDao(SwaggerDao).insert(entity)
+        SourceEntity entity = new SourceEntity().setBasePath(swaggerModel.getBasePath()).setHost(swaggerModel.getHost())
+                .setUrl(url)
+                .setLastUpdateTime(new Date().getTime() as Integer)
+                .setLastFetchTime()
+        new DaoFactory(SourceDao).withCloseable {
+            it.getDao().insert(entity)
         }
     }
 
