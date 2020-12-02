@@ -13,7 +13,7 @@ class ConnectUtilTest extends Specification {
             def sourceEntity = new SourceEntity().setHost("test").setBasePath("test").setUrl("..")
         expect:
             def test = new DaoFactory(SourceDao).withCloseable {
-                it.getDao().insert(sourceEntity)
+                it.geTransactionalDao().insert(sourceEntity)
             }
             log.info("test")
     }

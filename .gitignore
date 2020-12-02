@@ -35,5 +35,6 @@ Thumbs.db
 # else
 .idea
 *.jar
+
 buildSrc/build/
 buildSrc/.gradle
