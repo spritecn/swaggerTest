@@ -11,8 +11,6 @@ import org.jooq.impl.DefaultConfiguration
 import org.jooq.impl.DefaultConnectionProvider
 import org.jooq.impl.DefaultTransactionContext
 import org.jooq.impl.DefaultTransactionProvider
-
-import javax.swing.table.DefaultTableCellRenderer
 import java.sql.Connection
 import java.sql.DriverManager
 
