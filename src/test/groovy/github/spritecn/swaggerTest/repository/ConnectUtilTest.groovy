@@ -10,10 +10,12 @@ import spock.lang.Specification
 class ConnectUtilTest extends Specification {
     def "test getDao"() {
         given:
-            def sourceEntity = new SourceEntity().setHost("test").setBasePath("test").setUrl("..")
+            def sourceEntity = new SourceEntity().setHost("test").setBasePath("test").setUrl("..").setLastUpdateTime(new Date().getTime())
         expect:
             def test = new DaoFactory(SourceDao).withCloseable {
-                it.geTransactionalDao().insert(sourceEntity)
+                def dao = it.getDao()
+                dao.insert(sourceEntity)
+                //dao.insert(sourceEntity2)
             }
             log.info("test")
     }

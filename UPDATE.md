@@ -1,4 +1,7 @@
 # 更新/设计 记录
+## 2020/12/5
+- 测试可用api:http://api.vikingship.xyz/public/swagger/swagger.json
+
 
 ## 2020/11/29
 - 表结构设计
@@ -10,14 +13,13 @@
         - value
     - source 来源表，记录swagger来源
         - id
-        private String  url; //来源apiDocs地址
-        private String  name; //自定义名称
-        private Integer invalid; // 是否失效，失效后不更新
-        private Integer lastUpdateTime; //最后修改时间
-        private Integer lastFetchTime; //最获取时间
-        private Integer autoFetchInterval; //自动更新间隔时间(单位分钟,在输入时设置)
-        private String  basePath; //解析后文档swagger里的basePath
-        private String  host; //解析后文档swagger里的host
+        - url; //来源apiDocs地址
+        - name; //自定义名称
+        - invalid; // 是否失效，失效后不更新
+        - lastUpdateTime; //最后修改时间
+        - lastFetchTime; //最获取时间
+        - autoFetchInterval; //自动更新间隔时间(单位分钟,在输入时设置)
+        - basePath; //解析后文档swagger里的basePath,http://ssss.com/api
     - api  api表，记录所有解析出来的api
         - id
         - last_update_time
@@ -33,8 +35,16 @@
         - last_update_time
         - name
         - corn 执行时间表达式
-        - next_time 下一次执行的时间
-        - report //结果邮件报告,json数组 [{type:mail,to:,}],可以配置多个，暂只支持出件，标题默认，发件人走全局配置
+        - next_execute_time 下一次执行的时间
+        - report //结果邮件报告,json数组 [{type:mail,to:,}],可以配置多个，暂只支持邮件，标题默认，发件人走全局配置，收件可多选
+    - running 执行表
+        - id
+        - last_update_time
+        - group_id
+        - fail_count
+        - pass_count
+        - start_time /整个group开始时间
+        - end_time //整个group结束时间
     - task 测试任务表
         - id
         - last_update_time
@@ -42,14 +52,19 @@
         - group_id //归属测试组id
         - request_body //请求体
         - headers //请求头json
-        - pass_condition //测试通过条件,逗号分割，支持多个条件，默认status=200,可以写 response.json.msg = success 
-    - result 测试结果
-         - id
-         - last_update_time
-         - task_id
-         - passed //是否通过
-         - 
+        - pass_condition //测试通过条件,逗号分割，支持多个条件，默认status=200,可以写 response.json.msg = success
+        - last_passed //最后一次测试是否通过
+        - last_query_time //最后一次测试用的时间
     - request 请求记录，所有请求都会在这里记一个日志
+           - id
+           - last_update_time
+           - running_id
+           - task_id
+           - start_time
+           - end_time
+           - request  //包含内容和头
+           - response //包含内容和头
+           - status
 ## 2020/11/24
 - 数据库ORM从JDBI更新到JOOQ
     1. 喜欢JOOQ链式语法
