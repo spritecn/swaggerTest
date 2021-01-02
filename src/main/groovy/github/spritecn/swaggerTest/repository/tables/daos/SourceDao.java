@@ -157,18 +157,4 @@ public class SourceDao extends DAOImpl<SourceRecord, SourceEntity, Integer> {
     public List<SourceEntity> fetchByBasePath(String... values) {
         return fetch(Source.SOURCE.BASE_PATH, values);
     }
-
-    /**
-     * Fetch records that have <code>host BETWEEN lowerInclusive AND upperInclusive</code>
-     */
-    public List<SourceEntity> fetchRangeOfHost(String lowerInclusive, String upperInclusive) {
-        return fetchRange(Source.SOURCE.HOST, lowerInclusive, upperInclusive);
-    }
-
-    /**
-     * Fetch records that have <code>host IN (values)</code>
-     */
-    public List<SourceEntity> fetchByHost(String... values) {
-        return fetch(Source.SOURCE.HOST, values);
-    }
 }

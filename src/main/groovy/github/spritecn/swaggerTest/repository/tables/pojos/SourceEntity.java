@@ -13,7 +13,7 @@ import java.io.Serializable;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SourceEntity implements Serializable {
 
-    private static final long serialVersionUID = 1266278967;
+    private static final long serialVersionUID = 1653899634;
 
     private Integer id;
     private String  url;
@@ -23,7 +23,6 @@ public class SourceEntity implements Serializable {
     private Long    lastFetchTime;
     private Short   autoFetchInterval;
     private String  basePath;
-    private String  host;
 
     public SourceEntity() {}
 
@@ -36,7 +35,6 @@ public class SourceEntity implements Serializable {
         this.lastFetchTime = value.lastFetchTime;
         this.autoFetchInterval = value.autoFetchInterval;
         this.basePath = value.basePath;
-        this.host = value.host;
     }
 
     public SourceEntity(
@@ -47,8 +45,7 @@ public class SourceEntity implements Serializable {
         Long    lastUpdateTime,
         Long    lastFetchTime,
         Short   autoFetchInterval,
-        String  basePath,
-        String  host
+        String  basePath
     ) {
         this.id = id;
         this.url = url;
@@ -58,7 +55,6 @@ public class SourceEntity implements Serializable {
         this.lastFetchTime = lastFetchTime;
         this.autoFetchInterval = autoFetchInterval;
         this.basePath = basePath;
-        this.host = host;
     }
 
     public Integer getId() {
@@ -133,15 +129,6 @@ public class SourceEntity implements Serializable {
         return this;
     }
 
-    public String getHost() {
-        return this.host;
-    }
-
-    public SourceEntity setHost(String host) {
-        this.host = host;
-        return this;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("SourceEntity (");
@@ -154,7 +141,6 @@ public class SourceEntity implements Serializable {
         sb.append(", ").append(lastFetchTime);
         sb.append(", ").append(autoFetchInterval);
         sb.append(", ").append(basePath);
-        sb.append(", ").append(host);
 
         sb.append(")");
         return sb.toString();

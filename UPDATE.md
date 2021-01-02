@@ -11,7 +11,18 @@
         - type (headers,pass_condition等)
         - name 
         - value
+        ```sql
+                CREATE TABLE "config" (
+            "id"	INTEGER NOT NULL,
+            "last_update_time"	INT8,
+            "type"	INT2 DEFAULT 0,
+            "name"	TEXT,
+            "value"	TEXT,
+            PRIMARY KEY("id" AUTOINCREMENT)
+            );
+        ```
     - source 来源表，记录swagger来源
+      
         - id
         - url; //来源apiDocs地址
         - name; //自定义名称
@@ -20,23 +31,59 @@
         - lastFetchTime; //最获取时间
         - autoFetchInterval; //自动更新间隔时间(单位分钟,在输入时设置)
         - basePath; //解析后文档swagger里的basePath,http://ssss.com/api
+        ```sql
+                CREATE TABLE "source" (
+            "id"	INTEGER NOT NULL,
+            "url"	TEXT NOT NULL,
+            "name"	TEXT,
+            "invalid"	INT2 NOT NULL DEFAULT 0,
+            "last_update_time"	INT8,
+            "last_fetch_time"	INT8,
+            "auto_fetch_interval"	INT2 DEFAULT 0,
+            "base_path"	TEXT,
+            PRIMARY KEY("id" AUTOINCREMENT)
+            );
+        ```
     - api  api表，记录所有解析出来的api
         - id
         - last_update_time
         - url //完整url
         - tags //
-        - headers
-        - operation //请求类型 get post 
+        - method //请求类型 get post 
         - request_template //请求模板 json类型存json,非json类型存form格式数据或text
         - request_type  //请求类型json,form,text
         - response_type //结果类型，主要示别返回是不是json
+          ```sql
+          CREATE TABLE "api" (
+          "id"	INTEGER NOT NULL,
+          "last_update_time"	INT8,
+          "url"	TEXT,
+          "tags"	TEXT,
+          "method"	INT2 DEFAULT 0,
+          "request_type"	INT2 DEFAULT 0,
+          "response_type"	INT2 DEFAULT 0,
+          "request_template"	TEXT,
+          PRIMARY KEY("id" AUTOINCREMENT)
+          );
+        ```
     - group 测试组表,统一配置一组测试，所有task至少归于一个测试组
         - id
         - last_update_time
         - name
         - corn 执行时间表达式
         - next_execute_time 下一次执行的时间
-        - report //结果邮件报告,json数组 [{type:mail,to:,}],可以配置多个，暂只支持邮件，标题默认，发件人走全局配置，收件可多选
+        - report_json //结果邮件报告,json数组 [{type:mail,to:,}],可以配置多个，暂只支持邮件，标题默认，发件人走全局配置，收件可多选
+       ```sql
+          CREATE TABLE "api" (
+          "id"	INTEGER NOT NULL,
+          "last_update_time"	INT8,
+          "name"	TEXT,
+          "corn"	TEXT,
+          "next_execute_time"	INT8,
+          "report_json"	TEXT,
+          PRIMARY KEY("id" AUTOINCREMENT)
+          );
+        ```
     - running 执行表
         - id
         - last_update_time
@@ -45,16 +92,40 @@
         - pass_count
         - start_time /整个group开始时间
         - end_time //整个group结束时间
+          ```sql
+          CREATE TABLE "running" (
+          "id"	INTEGER NOT NULL,
+          "last_update_time"	INT8,
+          "group_id"	INTEGER NOT NULL,
+           "fail_count"	INTEGER,
+          "pass_count"	INTEGER,
+          "start_time"	INT8,
+          "end_time"	INT8,
+          PRIMARY KEY("id" AUTOINCREMENT)
+          );
+          ```
     - task 测试任务表
         - id
         - last_update_time
         - api_id //对应api id
         - group_id //归属测试组id
         - request_body //请求体
-        - headers //请求头json
+        - request_headers //请求头json
         - pass_condition //测试通过条件,逗号分割，支持多个条件，默认status=200,可以写 response.json.msg = success
         - last_passed //最后一次测试是否通过
         - last_query_time //最后一次测试用的时间
+          ```sql
+          CREATE TABLE "task" (
+          "id"	INTEGER NOT NULL,
+          "last_update_time"	INT8,
+          "request_body"	TEXT,
+          "fail_count"	INTEGER,
+          "pass_count"	INTEGER,
+          "start_time"	INT8,
+          "end_time"	INT8,
+          PRIMARY KEY("id" AUTOINCREMENT)
+          );
+          ```
     - request 请求记录，所有请求都会在这里记一个日志
            - id
            - last_update_time

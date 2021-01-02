@@ -16,7 +16,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row9;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Source extends TableImpl<SourceRecord> {
 
-    private static final long serialVersionUID = -909654132;
+    private static final long serialVersionUID = 211772219;
 
     /**
      * The reference instance of <code>source</code>
@@ -86,11 +86,6 @@ public class Source extends TableImpl<SourceRecord> {
      * The column <code>source.base_path</code>.
      */
     public final TableField<SourceRecord, String> BASE_PATH = createField(DSL.name("base_path"), org.jooq.impl.SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>source.host</code>.
-     */
-    public final TableField<SourceRecord, String> HOST = createField(DSL.name("host"), org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
      * Create a <code>source</code> table reference
@@ -172,11 +167,11 @@ public class Source extends TableImpl<SourceRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Integer, String, String, Short, Long, Long, Short, String, String> fieldsRow() {
-        return (Row9) super.fieldsRow();
+    public Row8<Integer, String, String, Short, Long, Long, Short, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }
