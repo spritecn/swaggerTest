@@ -24,7 +24,7 @@ class DaoFactory<T extends DAOImpl>  implements Closeable {
     }
     //default dao
     T  getDao(){
-        dao.newInstance( new DefaultConfiguration().set(conn).set(SQLDialect.SQLITE))
+        dao.newInstance(new DefaultConfiguration().set(conn).set(SQLDialect.SQLITE))
     }
 
 

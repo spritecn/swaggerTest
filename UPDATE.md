@@ -8,21 +8,20 @@
     - config 全局配置表
         - id
         - last_update_time
-        - type (headers,pass_condition等)
-        - name 
-        - value
+        - type  //(headers,pass_condition等)
+        - name  //配置名
+        - value //配置值
         ```sql
-                CREATE TABLE "config" (
-            "id"	INTEGER NOT NULL,
-            "last_update_time"	INT8,
-            "type"	INT2 DEFAULT 0,
-            "name"	TEXT,
-            "value"	TEXT,
-            PRIMARY KEY("id" AUTOINCREMENT)
+            CREATE TABLE "config" (
+                "id"	INTEGER NOT NULL,
+                "last_update_time"	INT8,
+                "type"	INT2 DEFAULT 0,
+                "name"	TEXT,
+                "value"	TEXT,
+                PRIMARY KEY("id" AUTOINCREMENT)
             );
         ```
     - source 来源表，记录swagger来源
-      
         - id
         - url; //来源apiDocs地址
         - name; //自定义名称
@@ -47,6 +46,7 @@
     - api  api表，记录所有解析出来的api
         - id
         - last_update_time
+        - source_id
         - url //完整url
         - tags //
         - method //请求类型 get post 
@@ -57,6 +57,7 @@
           CREATE TABLE "api" (
           "id"	INTEGER NOT NULL,
           "last_update_time"	INT8,
+          "source_id"	INTEGER NOT NULL,
           "url"	TEXT,
           "tags"	TEXT,
           "method"	INT2 DEFAULT 0,
@@ -128,14 +129,28 @@
           ```
     - request 请求记录，所有请求都会在这里记一个日志
            - id
-           - last_update_time
-           - running_id
-           - task_id
-           - start_time
-           - end_time
+           - last_update_time 
+           - running_id //执行表id
+           - task_id //任务表id
+           - start_time //请求开始时间
+           - end_time //请求结束时间
            - request  //包含内容和头
            - response //包含内容和头
-           - status
+           - status_code  //状态码
+           
+           ``` sql
+             CREATE TABLE "task" (
+             "id"	INTEGER NOT NULL,
+             "last_update_time"	INT8,
+             "task_id"	INTEGER,
+             "start_time"	INT8,
+             "end_time"	INT8,
+             "request"	TEXT,
+             "response"	TEXT,
+             "status_code"	INTEGER,
+             PRIMARY KEY("id" AUTOINCREMENT)
+             );
+             ```
 ## 2020/11/24
 - 数据库ORM从JDBI更新到JOOQ
     1. 喜欢JOOQ链式语法
