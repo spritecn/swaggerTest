@@ -1,6 +1,11 @@
 # 更新/设计 记录
+## 2021/01/04
+- 生成所有表代码
+- 引入hutool-all
+
+
 ## 2020/12/5
-- 测试可用api:http://api.vikingship.xyz/public/swagger/swagger.json
+- 测试可用api:https://petstore.swagger.io/v2/swagger.json
 
 
 ## 2020/11/29
@@ -67,7 +72,7 @@
           PRIMARY KEY("id" AUTOINCREMENT)
           );
         ```
-    - group 测试组表,统一配置一组测试，所有task至少归于一个测试组
+    - task_group 测试组表,统一配置一组测试，所有task至少归于一个测试组
         - id
         - last_update_time
         - name
@@ -75,7 +80,7 @@
         - next_execute_time 下一次执行的时间
         - report_json //结果邮件报告,json数组 [{type:mail,to:,}],可以配置多个，暂只支持邮件，标题默认，发件人走全局配置，收件可多选
        ```sql
-          CREATE TABLE "api" (
+          CREATE TABLE "task_group" (
           "id"	INTEGER NOT NULL,
           "last_update_time"	INT8,
           "name"	TEXT,
@@ -139,7 +144,7 @@
            - status_code  //状态码
            
            ``` sql
-             CREATE TABLE "task" (
+             CREATE TABLE "request" (
              "id"	INTEGER NOT NULL,
              "last_update_time"	INT8,
              "task_id"	INTEGER,

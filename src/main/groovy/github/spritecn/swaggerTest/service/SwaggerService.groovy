@@ -6,7 +6,7 @@ import github.spritecn.swaggerTest.repository.tables.pojos.SourceEntity
 import github.spritecn.swaggerTest.util.DaoFactory
 import groovy.util.logging.Slf4j
 
-import io.swagger.models.Swagger as SwaggerModel
+import io.swagger.models.Swagger
 import io.swagger.parser.SwaggerParser
 import github.spritecn.swaggerTest.util.HttpUtil
 
@@ -14,11 +14,11 @@ import github.spritecn.swaggerTest.util.HttpUtil
 class SwaggerService {
 
     static saveSwagger(String url){
-        SwaggerModel swaggerModel = parseApiDocByUrl(url)
-        if(!swaggerModel){
+        Swagger swagger = parseApiDocByUrl(url)
+        if(!swagger){
             throw new SwaggerTestException("swagger parse error")
         }
-        SourceEntity entity = new SourceEntity().setBasePath(swaggerModel.getBasePath()).setHost(swaggerModel.getHost())
+        SourceEntity entity = new SourceEntity().setBasePath(swagger.getBasePath())
                 .setUrl(url)
                 .setLastUpdateTime(new Date().getTime() as Integer)
                 .setLastFetchTime()
@@ -27,10 +27,10 @@ class SwaggerService {
         }
     }
 
-    static SwaggerModel parseApiDocByUrl(String url){
+    static Swagger parseApiDocByUrl(String url){
         def swaggerJson = HttpUtil.get(url)
-        new SwaggerParser().parse(swaggerJson)
+        Swagger swagger = new SwaggerParser().parse(swaggerJson)
+        return swagger
     }
-
 
 }

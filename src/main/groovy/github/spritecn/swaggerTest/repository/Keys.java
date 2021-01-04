@@ -4,8 +4,20 @@
 package github.spritecn.swaggerTest.repository;
 
 
+import github.spritecn.swaggerTest.repository.tables.Api;
+import github.spritecn.swaggerTest.repository.tables.Config;
+import github.spritecn.swaggerTest.repository.tables.Request;
+import github.spritecn.swaggerTest.repository.tables.Running;
 import github.spritecn.swaggerTest.repository.tables.Source;
+import github.spritecn.swaggerTest.repository.tables.Task;
+import github.spritecn.swaggerTest.repository.tables.TaskGroup;
+import github.spritecn.swaggerTest.repository.tables.records.ApiRecord;
+import github.spritecn.swaggerTest.repository.tables.records.ConfigRecord;
+import github.spritecn.swaggerTest.repository.tables.records.RequestRecord;
+import github.spritecn.swaggerTest.repository.tables.records.RunningRecord;
 import github.spritecn.swaggerTest.repository.tables.records.SourceRecord;
+import github.spritecn.swaggerTest.repository.tables.records.TaskGroupRecord;
+import github.spritecn.swaggerTest.repository.tables.records.TaskRecord;
 
 import org.jooq.Identity;
 import org.jooq.TableField;
@@ -30,7 +42,13 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ApiRecord> PK_API = UniqueKeys0.PK_API;
+    public static final UniqueKey<ConfigRecord> PK_CONFIG = UniqueKeys0.PK_CONFIG;
+    public static final UniqueKey<RequestRecord> PK_REQUEST = UniqueKeys0.PK_REQUEST;
+    public static final UniqueKey<RunningRecord> PK_RUNNING = UniqueKeys0.PK_RUNNING;
     public static final UniqueKey<SourceRecord> PK_SOURCE = UniqueKeys0.PK_SOURCE;
+    public static final UniqueKey<TaskRecord> PK_TASK = UniqueKeys0.PK_TASK;
+    public static final UniqueKey<TaskGroupRecord> PK_TASK_GROUP = UniqueKeys0.PK_TASK_GROUP;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -46,6 +64,12 @@ public class Keys {
     }
 
     private static class UniqueKeys0 {
+        public static final UniqueKey<ApiRecord> PK_API = Internal.createUniqueKey(Api.API, "pk_api", new TableField[] { Api.API.ID }, true);
+        public static final UniqueKey<ConfigRecord> PK_CONFIG = Internal.createUniqueKey(Config.CONFIG, "pk_config", new TableField[] { Config.CONFIG.ID }, true);
+        public static final UniqueKey<RequestRecord> PK_REQUEST = Internal.createUniqueKey(Request.REQUEST, "pk_request", new TableField[] { Request.REQUEST.ID }, true);
+        public static final UniqueKey<RunningRecord> PK_RUNNING = Internal.createUniqueKey(Running.RUNNING, "pk_running", new TableField[] { Running.RUNNING.ID }, true);
         public static final UniqueKey<SourceRecord> PK_SOURCE = Internal.createUniqueKey(Source.SOURCE, "pk_source", new TableField[] { Source.SOURCE.ID }, true);
+        public static final UniqueKey<TaskRecord> PK_TASK = Internal.createUniqueKey(Task.TASK, "pk_task", new TableField[] { Task.TASK.ID }, true);
+        public static final UniqueKey<TaskGroupRecord> PK_TASK_GROUP = Internal.createUniqueKey(TaskGroup.TASK_GROUP, "pk_task_group", new TableField[] { TaskGroup.TASK_GROUP.ID }, true);
     }
 }

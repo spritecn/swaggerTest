@@ -38,7 +38,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.14.9'
     compile 'com.github.icecooly:FastHttpClient:1.7'
     compile 'io.swagger:swagger-parser:1.0.52'
-    compile ('cn.hutool:hutool-setting:5.5.1') {
+    compile ('cn.hutool:hutool-all:5.5.6') {
         exclude  group: 'cn.hutool', module: 'hutool-log'
     }
     compile 'org.jooq:jooq-codegen:3.13.6'

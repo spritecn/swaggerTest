@@ -5,7 +5,7 @@ import spock.lang.Specification
 class SwaggerServiceTest extends Specification {
     def "test saveSwagger"() {
         given:
-            def url  = "http://qfcc.qiaofangyun.com/api/call/swagger-ui.html"
+            def url  = "https://petstore.swagger.io/v2/swagger.json"
         when:
             SwaggerService.saveSwagger(url)
         then:
